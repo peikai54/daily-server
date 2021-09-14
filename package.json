@@ -19,7 +19,9 @@
     "koa": "^2.7.0",
     "koa-bodyparser": "^4.2.1",
     "koa-jwt": "^4.0.1",
-    "koa-router": "^7.4.0"
+    "koa-router": "^7.4.0",
+    "mysql": "^2.18.1",
+    "mysql2": "^2.3.0"
   },
   "devDependencies": {
     "@types/koa": "^2.0.48",

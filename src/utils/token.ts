@@ -1,15 +1,13 @@
-const key = "key";
+import { secretKey } from "../config";
 const jwt = require("jsonwebtoken");
 
 export const getToken = (username: string): string => {
   const payload = {
     username,
   };
-
   let token = "";
-
   try {
-    token = jwt.sign(payload, key, { expiresIn: 60 * 60 });
+    token = jwt.sign(payload, secretKey, { expiresIn: 60 * 60 });
     return token;
   } catch (error) {
     console.log(error);
@@ -18,6 +16,6 @@ export const getToken = (username: string): string => {
 };
 
 export const decodeToken = (token: string) => {
-  const decoded = jwt.verify(token, key);
+  const decoded = jwt.verify(token, secretKey);
   return decoded;
 };
