@@ -3,6 +3,7 @@ import * as Router from "koa-router";
 import * as bodyParser from "koa-bodyparser";
 import AppRoutes, { withoutAuth } from "./routes";
 import { getPath } from "./utils/route";
+import { secretKey } from "./config";
 const koaLog = require("koa-log");
 const jwt = require("koa-jwt");
 const cors = require("@koa/cors");
@@ -22,7 +23,7 @@ AppRoutes.forEach((route) =>
 );
 
 app.use(
-  jwt({ secret: "key" }).unless({
+  jwt({ secret: secretKey }).unless({
     path: withoutAuth.map((el) => getPath(el.path)),
   })
 );

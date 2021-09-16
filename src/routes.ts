@@ -17,8 +17,8 @@ export default [
   },
 
   {
-    path: "/auth",
+    path: "/user-info",
     method: "get",
-    action: LoginController.auth,
+    action: LoginController.getUserInfo,
   },
 ];

@@ -1,4 +1,4 @@
-import { decodeToken } from "src/utils/token";
+import { decodeToken, getTokenFromHeader } from "src/utils/token";
 import LoginService from "../service/login";
 
 class LoginController {
@@ -14,22 +14,20 @@ class LoginController {
       const result = await this.service.login(data.username, data.password);
       ctx.body = result;
       if (result.code === 0) {
-        ctx.cookies.set("jwt", result.token, { maxAge: 24 * 60 * 60 * 1000 });
+        ctx.cookies.set("jwt", result.token, {
+          maxAge: 10 * 24 * 60 * 60 * 1000,
+          httpOnly: false,
+        });
       }
       return;
     }
   };
 
-  // 鉴权测试
-  auth = async (ctx) => {
-    const token = ctx.headers["authorization"];
-    ctx.body = "success";
-    try {
-      const data = decodeToken(token);
-      console.log(data);
-    } catch (error) {
-      console.log("catch you");
-    }
+  // 获取userInfo
+  getUserInfo = async (ctx) => {
+    const token = getTokenFromHeader(ctx);
+    const data = decodeToken(token);
+    ctx.body = { username: data.username };
   };
 }
 
