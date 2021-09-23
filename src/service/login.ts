@@ -2,11 +2,13 @@ import { signToken } from "src/utils/token";
 import LoginModel from "src/model/users";
 import * as _ from "lodash";
 import { wrapSuccess } from "src/utils/route";
+import { ILoginReq } from "src/controller/types/login";
 
 export default class LoginService {
-  login = async (username: string, password: string) => {
+  login = async (props: ILoginReq) => {
     try {
-      const data = await LoginModel.login(username, password);
+      const { username } = props;
+      const data = await LoginModel.login(props);
       if (!_.isEmpty(data)) {
         const token = signToken(username);
         return wrapSuccess({ token }, "登录成功");

@@ -1,18 +1,19 @@
 import { wrapSuccess } from "src/utils/route";
 import { decodeToken, getTokenFromHeader } from "src/utils/token";
 import LoginService from "../service/login";
+import { ILoginReq } from "./types/login";
 
 class LoginController {
   private service = new LoginService();
 
   // 登录
   login = async (ctx) => {
-    const data = ctx.request.body;
+    const data: ILoginReq = ctx.request.body;
     if (!data.username || !data.password) {
       ctx.body = "请输入用户名与密码";
       return;
     } else {
-      const result = await this.service.login(data.username, data.password);
+      const result = await this.service.login(data);
       ctx.body = result;
       if (result.code === 0) {
         ctx.cookies.set("jwt", result.data.token, {

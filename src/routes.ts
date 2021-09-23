@@ -1,5 +1,5 @@
-import homeController from "./controller/home-controller";
 import LoginController from "./controller/login";
+import TaskController from "./controller/task";
 
 export const withoutAuth = [
   {
@@ -11,14 +11,13 @@ export const withoutAuth = [
 
 export default [
   {
-    path: "/",
-    method: "get",
-    action: homeController.hello,
-  },
-
-  {
     path: "/user-info",
     method: "get",
     action: LoginController.getUserInfo,
+  },
+  {
+    path: "/add-task",
+    method: "post",
+    action: TaskController.add,
   },
 ];
