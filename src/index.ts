@@ -1,12 +1,16 @@
 import * as Koa from "koa";
 import * as Router from "koa-router";
 import * as bodyParser from "koa-bodyparser";
+import "reflect-metadata";
 import AppRoutes, { withoutAuth } from "./routes";
+import loading from "./mysql-loading";
 import { getPath } from "./utils/route";
 import { secretKey } from "./config";
 const koaLog = require("koa-log");
 const jwt = require("koa-jwt");
 const cors = require("@koa/cors");
+
+loading();
 
 const app = new Koa();
 const router = new Router();
