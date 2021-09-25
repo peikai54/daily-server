@@ -1,4 +1,4 @@
-import { wrapSuccess } from "src/utils/route";
+import { wrapSuccess } from "@src/utils/route";
 import { decodeToken, getTokenFromHeader } from "src/utils/token";
 import LoginService from "../service/login";
 import { ILoginReq } from "./types/login";

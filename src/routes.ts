@@ -7,6 +7,16 @@ export const withoutAuth = [
     method: "post",
     action: LoginController.login,
   },
+  {
+    path: "/task-type-list",
+    method: "get",
+    action: TaskController.taskTypeList,
+  },
+  {
+    path: "/target-list",
+    method: "get",
+    action: TaskController.targetList,
+  },
 ];
 
 export default [
