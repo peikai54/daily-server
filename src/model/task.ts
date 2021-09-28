@@ -1,8 +1,8 @@
-import moment = require("moment");
 import { connectionName } from "src/config";
-import { ITastAddReq } from "src/controller/types/task";
+import { ITaskListReq, ITastAddReq } from "src/controller/types/task";
 import { Task } from "src/entities/task";
 import { getConnection } from "typeorm";
+import { taskQuery } from "./util/task";
 
 class TaskModel {
   add = async (props: ITastAddReq) => {
@@ -15,6 +15,21 @@ class TaskModel {
         .values(props)
         .execute();
       return result;
+    } catch (error) {
+      throw error;
+    }
+  };
+
+  list = async (props: ITaskListReq) => {
+    try {
+      const conn = getConnection(connectionName);
+      let queryBuilder = conn
+        .createQueryBuilder()
+        .from(Task, "task")
+        .select(["task"]);
+      queryBuilder = taskQuery(queryBuilder, props);
+      const data = await queryBuilder.getMany();
+      return data;
     } catch (error) {
       throw error;
     }

@@ -26,6 +26,11 @@ export default [
     action: LoginController.getUserInfo,
   },
   {
+    path: "/task-list",
+    method: "get",
+    action: TaskController.list,
+  },
+  {
     path: "/add-task",
     method: "post",
     action: TaskController.add,

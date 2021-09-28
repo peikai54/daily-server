@@ -1,4 +1,4 @@
-import { ITastAddReq } from "./types/task";
+import { ITaskListReq, ITastAddReq } from "./types/task";
 import TaskService from "src/service/task";
 import { wrapSuccess } from "@src/utils/route";
 
@@ -18,6 +18,12 @@ class TaskController {
 
   targetList = async (ctx) => {
     const data = await this.taskService.targetList();
+    ctx.body = wrapSuccess(data);
+  };
+
+  list = async (ctx) => {
+    const params: ITaskListReq = ctx.request.query;
+    const data = await this.taskService.list(params);
     ctx.body = wrapSuccess(data);
   };
 }

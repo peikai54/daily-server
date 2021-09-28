@@ -7,3 +7,15 @@ export interface ITastAddReq {
   type: string;
   target: string;
 }
+
+export interface ITaskListReq {
+  task_name?: string;
+  state?: number;
+  creater?: string;
+  type?: string;
+  target?: string;
+  start_range?: string;
+  end_range?: string;
+  size?: number;
+  index?: number;
+}

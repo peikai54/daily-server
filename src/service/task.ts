@@ -1,4 +1,4 @@
-import { ITastAddReq } from "src/controller/types/task";
+import { ITaskListReq, ITastAddReq } from "src/controller/types/task";
 import TaskModel from "src/model/task";
 import * as _ from "lodash";
 
@@ -12,9 +12,19 @@ export default class TaskService {
     }
   };
 
+  list = async (props: ITaskListReq) => {
+    try {
+      const data = TaskModel.list(props);
+      return data;
+    } catch (error) {
+      throw error;
+    }
+  };
+
   taskTypeList = async () => {
     try {
-      const result = await TaskModel.taskTypeList();
+      const data = await TaskModel.taskTypeList();
+      const result = _.uniqWith(data, _.isEqual);
       return result;
     } catch (error) {
       throw error;
@@ -23,8 +33,9 @@ export default class TaskService {
 
   targetList = async () => {
     try {
-      const result = await TaskModel.targetList();
-      return _.uniq(result);
+      const data = await TaskModel.targetList();
+      const result = _.uniqWith(data, _.isEqual);
+      return result;
     } catch (error) {
       throw error;
     }

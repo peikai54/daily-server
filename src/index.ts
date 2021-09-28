@@ -32,8 +32,6 @@ app.use(
   })
 );
 
-debugger;
-
 app.use(bodyParser());
 app.use(router.allowedMethods());
 app.use(router.routes());

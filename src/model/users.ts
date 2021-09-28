@@ -1,7 +1,7 @@
 import { connectionName } from "src/config";
 import { ILoginReq } from "src/controller/types/login";
 import { Users } from "src/entities/user";
-import { getConnection } from "typeorm";
+import { getConnection, SelectQueryBuilder } from "typeorm";
 
 class UserModel {
   login = async (props: ILoginReq) => {
@@ -10,10 +10,11 @@ class UserModel {
       const data = await conn
         .createQueryBuilder()
         .select("users")
+        .where("users.username = :name", { name: props.username })
+        .andWhere("users.password = :password", { password: props.password })
         .from(Users, "users")
         .getOne();
-      const result = JSON.parse(JSON.stringify(data));
-      return result;
+      return data;
     } catch (error) {
       throw error;
     }

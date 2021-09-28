@@ -15,7 +15,7 @@ class LoginController {
     } else {
       const result = await this.service.login(data);
       ctx.body = result;
-      if (result.code === 0) {
+      if (result?.code === 0) {
         ctx.cookies.set("jwt", result.data.token, {
           maxAge: 10 * 24 * 60 * 60 * 1000,
           httpOnly: false,
