@@ -14,8 +14,8 @@ export default class TaskService {
 
   list = async (props: ITaskListReq) => {
     try {
-      const data = TaskModel.list(props);
-      return data;
+      const items = await TaskModel.list(props);
+      return { items, total: items.length };
     } catch (error) {
       throw error;
     }
